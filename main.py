@@ -193,7 +193,7 @@ def handle_message(event):
 @handler.add(JoinEvent)
 def handle_follow(event):
     line.reply_message(event.reply_token, TextSendMessage(
-        text="Hello! Thanks for adding me!\nDISCLAIMER: This is not an official MyClass BOT\n\nAvailable Commands\n" + prefix + "help\n" + prefix + "login username password\n" + prefix + "sch\n" + prefix + "schpc\n" + prefix + "leave"))
+        text="Hello! Thanks for adding me!\nDISCLAIMER: This is not an official MyClass BOT\n\nAvailable Commands\n" + prefix + "help\n" + prefix + "login username password\n" + prefix + "sch\n" + prefix + "schpc\n" + prefix + "leave\n\nPs: Your password is not stored nor logged!"))
 
 
 if __name__ == "__main__":
