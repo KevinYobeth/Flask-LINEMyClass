@@ -8,7 +8,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, TemplateSendMessage, CarouselTemplate, CarouselColumn, PostbackAction, MessageAction, URIAction
+    MessageEvent, JoinEvent, TextMessage, TextSendMessage, ImageSendMessage, TemplateSendMessage, CarouselTemplate, CarouselColumn, PostbackAction, MessageAction, URIAction
 )
 
 app = Flask(__name__)
@@ -56,11 +56,14 @@ def handle_message(event):
         else:
             if chatType == 'room':
                 line.push_message(event.source.user_id, TextSendMessage(
-                    text='Do not login on group chats! Unsent your username and password immediately!'))
+                    text='Do not login on group chat! Unsent your username and password immediately!'))
+                line.reply_message(
+                    event.reply_token, TextSendMessage(text="Please check your private message!"))
             elif chatType == 'group':
                 line.push_message(event.source.user_id, TextSendMessage(
-                    text='Do not login on group chats! Unsent your username and password immediately!'))
-
+                    text='Do not login on group chat! Unsent your username and password immediately!'))
+                line.reply_message(
+                    event.reply_token, TextSendMessage(text="Please check your private message!"))
             else:
                 uid = event.source.user_id
                 username = msg[1]
@@ -83,16 +86,9 @@ def handle_message(event):
 
     if msg == prefix + 'sch':
 
-        if chatType == 'room':
-            pass
-        elif chatType == 'group':
-            pass
-        else:
-            pass
-
         if event.source.user_id not in Data:
             line.reply_message(
-                event.reply_token, TextSendMessage(text="Please use " + prefix + "login [username] [password] on private chat first\n\nExample:\n" + prefix + "login leonardus.yobeth th1sp4wd"))
+                event.reply_token, TextSendMessage(text="Please use " + prefix + "login [username] [password] on private chat first\n\nExample:\n" + prefix + "login bambang.ferguso th1sp4wd"))
         else:
             data = {
                 'Username': Data[event.source.user_id]['un'],
@@ -120,6 +116,12 @@ def handle_message(event):
                                 text='Kelas ' + schdl.json()[i]['CourseTitleEn'] + ' woi jam ' +
                                 schdl.json()[i]['StartTime'],
                             ),
+                            MessageAction(
+                                label=schdl.json()[
+                                    i]['StartTime'] + " - " + schdl.json()[i]['EndTime'],
+                                text='Kelas ' + schdl.json()[i]['CourseTitleEn'] + ' woi jam ' +
+                                schdl.json()[i]['StartTime'],
+                            ),
                             URIAction(
                                 label='GSLC' if schdl.json(
                                 )[i]['MeetingUrl'] == '-' else 'Join Meeting',
@@ -140,8 +142,32 @@ def handle_message(event):
             line.reply_message(
                 event.reply_token, carousel)
 
+    if msg == prefix + 'schpc':
+
+        if event.source.user_id not in Data:
+            line.reply_message(
+                event.reply_token, TextSendMessage(text="Please use " + prefix + "login [username] [password] on private chat first\n\nExample:\n" + prefix + "login bambang.ferguso th1sp4wd"))
+        else:
+            data = {
+                'Username': Data[event.source.user_id]['un'],
+                'Password': Data[event.source.user_id]['ps']
+            }
+
+            s = requests.Session()
+            s.post(login_url, data)
+            schdl = s.get(
+                'https://myclass.apps.binus.ac.id/Home/GetViconSchedule')
+
+            line.reply_message(
+                event.reply_token, TextSendMessage(
+                    text=schdl.json()[0]['DeliveryMode'] + " - " + schdl.json()[0]['CourseTitleEn'] + "\n" + schdl.json()[0]['StartTime'] + " - " + schdl.json()[0]['EndTime'] + "\nMeeting ID: " + schdl.json()[0]['MeetingId'] + "\nMeeting Password: " + schdl.json()[0]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[0]['MeetingUrl'] + "\n\n" +
+                    schdl.json()[1]['DeliveryMode'] + " - " + schdl.json()[1]['CourseTitleEn'] + "\n" + schdl.json()[1]['StartTime'] + " - " + schdl.json()[1]['EndTime'] + "\nMeeting ID: " + schdl.json()[1]['MeetingId'] + "\nMeeting Password: " + schdl.json()[1]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[1]['MeetingUrl'] + "\n\n" +
+                    schdl.json()[2]['DeliveryMode'] + " - " + schdl.json()[2]['CourseTitleEn'] + "\n" + schdl.json()[2]['StartTime'] + " - " + schdl.json()[2]['EndTime'] +
+                    "\nMeeting ID: " + schdl.json()[2]['MeetingId'] + "\nMeeting Password: " + schdl.json()[
+                        2]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[2]['MeetingUrl']
+                ))
+
     if msg == prefix + 'leave':
-        # room | group | user
         if chatType == 'room':
             line.reply_message(
                 event.reply_token, TextSendMessage(text='Leaving Room!'))
@@ -158,6 +184,16 @@ def handle_message(event):
 
         line.reply_message(
             event.reply_token, TextSendMessage(text=event.source.type))
+
+    if msg == prefix + 'help':
+        line.reply_message(event.reply_token, TextSendMessage(
+            text="DISCLAIMER: This is not an official MyClass BOT\n\nAvailable Commands\n" + prefix + "help\n" + prefix + "login username password\n" + prefix + "sch\n" + prefix + "schpc\n" + prefix + "leave"))
+
+
+@handler.add(JoinEvent)
+def handle_follow(event):
+    line.reply_message(event.reply_token, TextSendMessage(
+        text="Hello! Thanks for adding me!\nDISCLAIMER: This is not an official MyClass BOT\n\nAvailable Commands\n" + prefix + "help\n" + prefix + "login username password\n" + prefix + "sch\n" + prefix + "schpc\n" + prefix + "leave"))
 
 
 if __name__ == "__main__":
