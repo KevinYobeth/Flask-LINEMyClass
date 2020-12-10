@@ -160,11 +160,10 @@ def handle_message(event):
 
             line.reply_message(
                 event.reply_token, TextSendMessage(
-                    text=schdl.json()[0]['DeliveryMode'] + " - " + schdl.json()[0]['CourseTitleEn'] + "\n" + schdl.json()[0]['StartTime'] + " - " + schdl.json()[0]['EndTime'] + "\nMeeting ID: " + schdl.json()[0]['MeetingId'] + "\nMeeting Password: " + schdl.json()[0]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[0]['MeetingUrl'] + "\n\n" +
-                    schdl.json()[1]['DeliveryMode'] + " - " + schdl.json()[1]['CourseTitleEn'] + "\n" + schdl.json()[1]['StartTime'] + " - " + schdl.json()[1]['EndTime'] + "\nMeeting ID: " + schdl.json()[1]['MeetingId'] + "\nMeeting Password: " + schdl.json()[1]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[1]['MeetingUrl'] + "\n\n" +
-                    schdl.json()[2]['DeliveryMode'] + " - " + schdl.json()[2]['CourseTitleEn'] + "\n" + schdl.json()[2]['StartTime'] + " - " + schdl.json()[2]['EndTime'] +
-                    "\nMeeting ID: " + schdl.json()[2]['MeetingId'] + "\nMeeting Password: " + schdl.json()[
-                        2]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[2]['MeetingUrl']
+                    text=schdl.json()[0]['DeliveryMode'] + " - " + schdl.json()[0]['CourseTitleEn'] + "\n" + schdl.json()[1]['DisplayStartDate'] + "," + schdl.json()[0]['StartTime'] + " - " + schdl.json()[0]['EndTime'] + "\nMeeting ID: " + schdl.json()[0]['MeetingId'] + "\nMeeting Password: " + schdl.json()[0]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[0]['MeetingUrl'] + "\n\n" +
+                    schdl.json()[1]['DeliveryMode'] + " - " + schdl.json()[1]['CourseTitleEn'] + "\n" + schdl.json()[2]['DisplayStartDate'] + "," + schdl.json()[1]['StartTime'] + " - " + schdl.json()[1]['EndTime'] + "\nMeeting ID: " + schdl.json()[1]['MeetingId'] + "\nMeeting Password: " + schdl.json()[1]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[1]['MeetingUrl'] + "\n\n" +
+                    schdl.json()[2]['DeliveryMode'] + " - " + schdl.json()[2]['CourseTitleEn'] + "\n" + schdl.json()[3]['DisplayStartDate'] + "," + schdl.json()[2]['StartTime'] + " - " + schdl.json()[
+                        2]['EndTime'] + "\nMeeting ID: " + schdl.json()[2]['MeetingId'] + "\nMeeting Password: " + schdl.json()[2]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[2]['MeetingUrl']
                 ))
 
     if msg == prefix + 'leave':
@@ -187,13 +186,13 @@ def handle_message(event):
 
     if msg == prefix + 'help':
         line.reply_message(event.reply_token, TextSendMessage(
-            text="DISCLAIMER: This is not an official MyClass BOT\n\nAvailable Commands\n" + prefix + "help\n" + prefix + "login username password\n" + prefix + "sch\n" + prefix + "schpc\n" + prefix + "leave"))
+            text="DISCLAIMER: This is not an official MyClass BOT\n\nAvailable Commands:\n" + prefix + "help\n" + prefix + "login username password\n" + prefix + "sch\n" + prefix + "schpc\n" + prefix + "leave"))
 
 
 @handler.add(JoinEvent)
 def handle_follow(event):
     line.reply_message(event.reply_token, TextSendMessage(
-        text="Hello! Thanks for adding me!\nDISCLAIMER: This is not an official MyClass BOT\n\nAvailable Commands\n" + prefix + "help\n" + prefix + "login username password\n" + prefix + "sch\n" + prefix + "schpc\n" + prefix + "leave\n\nPs: Your password is not stored nor logged!"))
+        text="Hello! Thanks for adding me!\nDISCLAIMER: This is not an official MyClass BOT\n\nAvailable Commands:\n" + prefix + "help\n" + prefix + "login username password\n" + prefix + "sch\n" + prefix + "schpc\n" + prefix + "leave\n\nPs: Your password is not stored nor logged!"))
 
 
 if __name__ == "__main__":
