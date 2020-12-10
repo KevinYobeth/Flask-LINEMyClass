@@ -8,7 +8,10 @@ data = {
 }
 
 s = requests.Session()
-s.post(login_url, data)
+r = s.post(login_url, data)
+
+print(r.json()['Message'])
+
 schdl = s.get('https://myclass.apps.binus.ac.id/Home/GetViconSchedule')
 
 print(schdl.json()[0]['MeetingUrl'])
