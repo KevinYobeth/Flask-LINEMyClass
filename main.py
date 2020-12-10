@@ -160,10 +160,12 @@ def handle_message(event):
 
             line.reply_message(
                 event.reply_token, TextSendMessage(
-                    text=schdl.json()[0]['DeliveryMode'] + " - " + schdl.json()[0]['CourseTitleEn'] + "\n" + schdl.json()[1]['DisplayStartDate'] + "," + schdl.json()[0]['StartTime'] + " - " + schdl.json()[0]['EndTime'] + "\nMeeting ID: " + schdl.json()[0]['MeetingId'] + "\nMeeting Password: " + schdl.json()[0]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[0]['MeetingUrl'] + "\n\n" +
-                    schdl.json()[1]['DeliveryMode'] + " - " + schdl.json()[1]['CourseTitleEn'] + "\n" + schdl.json()[2]['DisplayStartDate'] + "," + schdl.json()[1]['StartTime'] + " - " + schdl.json()[1]['EndTime'] + "\nMeeting ID: " + schdl.json()[1]['MeetingId'] + "\nMeeting Password: " + schdl.json()[1]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[1]['MeetingUrl'] + "\n\n" +
-                    schdl.json()[2]['DeliveryMode'] + " - " + schdl.json()[2]['CourseTitleEn'] + "\n" + schdl.json()[3]['DisplayStartDate'] + "," + schdl.json()[2]['StartTime'] + " - " + schdl.json()[
-                        2]['EndTime'] + "\nMeeting ID: " + schdl.json()[2]['MeetingId'] + "\nMeeting Password: " + schdl.json()[2]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[2]['MeetingUrl']
+                    text=schdl.json()[0]['DeliveryMode'] + " - " + schdl.json()[0]['CourseTitleEn'] + "\n" + schdl.json()[0]['DisplayStartDate'] + ", " + schdl.json()[0]['StartTime'] + " - " + schdl.json()[0]['EndTime'] + "\nMeeting ID: " + schdl.json()[0]['MeetingId'] + "\nMeeting Password: " + schdl.json()[0]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[0]['MeetingUrl'] + "\n\n" +
+                    schdl.json()[1]['DeliveryMode'] + " - " + schdl.json()[1]['CourseTitleEn'] + "\n" + schdl.json()[1]['DisplayStartDate'] + ", " + schdl.json()[1]['StartTime'] + " - " + schdl.json()[1]['EndTime'] + "\nMeeting ID: " + schdl.json()[1]['MeetingId'] + "\nMeeting Password: " + schdl.json()[1]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[1]['MeetingUrl'] + "\n\n" +
+                    schdl.json()[2]['DeliveryMode'] + " - " + schdl.json()[2]['CourseTitleEn'] + "\n" + schdl.json()[2]['DisplayStartDate'] + ", " + schdl.json()[2]['StartTime'] + " - " + schdl.json()[2]['EndTime'] + "\nMeeting ID: " + schdl.json()[2]['MeetingId'] + "\nMeeting Password: " + schdl.json()[2]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[2]['MeetingUrl'] + "\n\n" +
+                    schdl.json()[3]['DeliveryMode'] + " - " + schdl.json()[2]['CourseTitleEn'] + "\n" + schdl.json()[3]['DisplayStartDate'] + ", " + schdl.json()[3]['StartTime'] + " - " + schdl.json()[3]['EndTime'] + "\nMeeting ID: " + schdl.json()[3]['MeetingId'] + "\nMeeting Password: " + schdl.json()[3]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[3]['MeetingUrl'] + "\n\n" +
+                    schdl.json()[4]['DeliveryMode'] + " - " + schdl.json()[2]['CourseTitleEn'] + "\n" + schdl.json()[4]['DisplayStartDate'] + ", " + schdl.json()[4]['StartTime'] + " - " + schdl.json()[
+                        4]['EndTime'] + "\nMeeting ID: " + schdl.json()[4]['MeetingId'] + "\nMeeting Password: " + schdl.json()[4]['MeetingPassword'] + "\nMeeting Link: " + schdl.json()[4]['MeetingUrl']
                 ))
 
     if msg == prefix + 'leave':
