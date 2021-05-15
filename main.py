@@ -1,21 +1,24 @@
-import requests
-from flask import Flask, request, abort
+import os
 
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError
-)
-from linebot.models import (
-    MessageEvent, JoinEvent, TextMessage, TextSendMessage, ImageSendMessage, TemplateSendMessage, CarouselTemplate, CarouselColumn, PostbackAction, MessageAction, URIAction
-)
+import requests
+from dotenv import load_dotenv
+from flask import Flask, abort, request
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import (CarouselColumn, CarouselTemplate, ImageSendMessage,
+                            JoinEvent, MessageAction, MessageEvent,
+                            PostbackAction, TemplateSendMessage, TextMessage,
+                            TextSendMessage, URIAction)
+
+load_dotenv()
 
 app = Flask(__name__)
 
-line = LineBotApi(
-    'LDQyjg33LrsPBsHlmP9wSlyIGIz7Xb3R1DeIn2JeycXX5R6wmULu0Z0edX10ismW4PqM5MoavvFzNRm9f7JbbpKTdqRgLvA9KplzIQz+ozB+nvV2pQFWRONE0CvoBx6aqL9K1u5Y/NLJR/NVBEgcUgdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('744ab32bb1452fa4ae4d52a6b571779e')
+CHANNEL_ACCESS_TOKEN = os.environ.get("CHANNEL_ACCESS_TOKEN")
+CHANNEL_SECRET = os.environ.get("CHANNEL_SECRET")
+
+line = LineBotApi(CHANNEL_ACCESS_TOKEN)
+handler = WebhookHandler(CHANNEL_SECRET)
 
 prefix = '!'
 Data = {}
