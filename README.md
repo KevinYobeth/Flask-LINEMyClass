@@ -23,7 +23,6 @@ You can read more about this bot deployment from [here](https://developers.line.
 
 ## App Preview
 ### List 5 Upcoming Class
-<img src="assets/class_card.jpg" width=250 style="margin-right: 10px" />
-<img src="assets/class_text.jpg" width=250 />
+<img src="assets/class_card.jpg" width=300 style="margin-right: 10px" /> <img src="assets/class_text.jpg" width=300 />
 
 **Disclaimer:** This bot is created for educational & convenient purposes only.
