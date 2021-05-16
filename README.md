@@ -12,7 +12,7 @@ A Bot for loading and accessing class from the website MyClass withing the LINE 
     ```
     pip install -r requirements.txt
     ```
--   Create `.env` file, with your `CHANNEL_ACCESS_TOKEN` and `CHANNEL_SECRET`
+-   Create `.env` file, with your `CHANNEL_ACCESS_TOKEN` and `CHANNEL_SECRET` as key
 -   Run python server
     ```
     python3 main.py
